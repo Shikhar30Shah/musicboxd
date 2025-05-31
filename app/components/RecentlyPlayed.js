@@ -42,7 +42,19 @@ const RecentlyPlayed = (props) => {
 
     const handleRedirect = (e, item) => {
         e.preventDefault();
-        setParams({trackDetails: item});
+        const trackObj = {
+            name: item.track.name,
+            trackURL: item.track.external_urls.spotify,
+            popularity: item.track.popularity, 
+            album: item.track.album.name, 
+            artists: item.track.artists.map(at => at.name).join(', '), 
+            image: item.track.album.images[1].url, 
+            releaseDate: item.track.album.release_date, 
+            trackId: item.track.id, 
+            totalTracks: item.track.album.total_tracks, 
+            duration: item.track.duration_ms
+        }
+        setParams({trackDetails: trackObj});
         router.push(`/track/${item.track.id}`)
     }
 
@@ -50,9 +62,9 @@ const RecentlyPlayed = (props) => {
         <>
             {tracks && Object.keys(tracks).length>0 && <ul className="mt-7 card_grid">
                 {tracks.items?.length > 0 && (tracks.items.map((item, i) => (
-                    <li key={i} className="startup-card ground shadow-200">
+                    <li key={i} className="track-card ground shadow-200">
                         <div className="flex-between">
-                            <p className="startup-card_date">
+                            <p className="track-card-date">
                                 {item.track.album.release_date}
                             </p>
                             <div className="flex gap-1.5">
@@ -70,15 +82,14 @@ const RecentlyPlayed = (props) => {
                             </div>
                         </div>
 
-                        <Link href={{pathname: `/track/${item.track.id}`, query: {trackDetails: item}}}>
-                            {/* <p className="startup-card_desc">{review}</p> */}
-                            <img src={item.track.album.images[1].url} alt="placeholder" className="startup-card_img" />
+                        <Link href={`/track/${item.track.id}`} onClick={(e) => handleRedirect(e, item)}>
+                            <img src={item.track.album.images[1].url} alt="placeholder" className="track-card-img" />
                         </Link>
 
                         <div className="flex-between gap-3 mt-5">
                             <p className="text-[14px]">{item.track.album.name}</p>
-                            <Button className='startup-card_btn' asChild>
-                                <Link href={{pathname: `/track/${item.track.id}`, query: {trackDetails: item}}}>Details</Link>
+                            <Button className='track-card-btn' asChild>
+                                <Link href={`/track/${item.track.id}`} onClick={(e) => handleRedirect(e, item)}>Details</Link>
                             </Button>
                         </div>
                     </li>

@@ -10,7 +10,7 @@ import { useState } from 'react';
 import SaveReview from './SaveReview';
 // import { writeClient } from '../../sanity/lib/write-client';
 
-export default function AddReview({id}) {
+export default function AddReview() {
 
     const [open, setOpen] = useState(false);
     const [review, setReview] = useState('');
@@ -35,7 +35,7 @@ export default function AddReview({id}) {
                         {/* <Button className='bg-white text-black hover:bg-[#c9c9c9]'>
                             Save
                         </Button> */}
-                        <SaveReview review={review} id={id} setOpen={setOpen} />
+                        <SaveReview review={review} setOpen={setOpen} />
                     </DialogFooter>
                 </DialogContent>
             </Dialog>

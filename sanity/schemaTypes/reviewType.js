@@ -48,6 +48,18 @@ export const reviewType = defineType({
     defineField({
       name: 'trackId',
       type: 'string',
+    }),
+    defineField({
+      name: 'totalTracks',
+      type: 'number',
+    }),
+    defineField({
+      name: 'duration',
+      type: 'number',
+    }),
+    defineField({
+      name: 'trackURL',
+      type: 'string',
     })
   ]
 })

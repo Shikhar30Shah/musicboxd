@@ -61,46 +61,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return await refreshAccessToken(token);
     },
     async session({session, token}){
-      Object.assign(session, {id: token.id, accessToken: token.accessToken, refreshToken: token.refreshToken});
+      Object.assign(session, {id: token.id, accessToken: token.accessToken, refreshToken: token.refreshToken, error: token.error});
       return session;
     }
-    // async jwt({token, account, profile, user}) {
-    //   console.log('the account', account, token, profile, user);
-    //     console.log("JWT callback:", { token, account });
-    //   if(account && profile){
-    //       console.log("JWT callback two:", { token, account });
-    //     const user = await client.fetch(USER_BY_SPOTIFY_ID_QUERY, {
-    //       id: profile?.id
-    //     })
-    //     token.id = user._id
-    //   }
-    //   if (account) {
-    //     token.accessToken = account.access_token;
-    //     token.refreshToken = account.refresh_token;
-    //     token.expiresAt = Date.now() + account.expires_in * 1000;
-    //     return token;
-    //   }
-
-    //   // If token hasn't expired yet, return it
-    //   if (Date.now() < token.expiresAt) {
-    //     return token;
-    //   }
-
-    //   // Refresh token if expired
-    //   return await refreshAccessToken(token);
-    //   // return token
-    // },
-    // async session({session, token}){
-    //   Object.assign(session, {id: token.id});
-    //   return session;
-    // },
   }
 })
 
 export async function refreshAccessToken(token) {
   try {
     const basic = Buffer.from(
-      `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
+      `${process.env.AUTH_SPOTIFY_ID}:${process.env.AUTH_SPOTIFY_SECRET}`
     ).toString('base64');
 
     const response = await fetch('https://accounts.spotify.com/api/token', {

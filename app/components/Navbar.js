@@ -1,17 +1,18 @@
 import { auth, signOut, signIn } from "@/auth";
 import Image from "next/image";
 import Link from "next/link";
+import Logout from "./Logout";
 
 const Navbar = async () => {
 
     const session  = await auth();
 
     return (
-        <header className="px-5 py-3 ---background shadow-sm shadow-white">
+        <header className="px-5 py-3 ---background shadow-sm shadow-white navbar">
             <nav className="flex justify-between items-center">
                 <Link href="/" className="--foreground">
-                    <Image style={{display: 'inline-block', marginRight: '8px'}} src="/MusicBoxd.png" alt="logo" width={60} height={60} />
-                    <span className="text-3xl" style={{display: 'inline-block'}}>MusicBoxd</span>
+                    <Image style={{display: 'inline-block', marginRight: '8px'}} src="/AppLogo.svg" alt="logo" width={60} height={60} />
+                    <span className="lg:text-3xl md:text-lg sm:text-[18px] xs:text-[14px] " style={{display: 'inline-block'}}>MusicBoxd</span>
                 </Link>
 
                 <div className="flex items-center gap-5 --foreground">
@@ -47,6 +48,7 @@ const Navbar = async () => {
                     )}
                 </div>
             </nav>
+            <Logout session={session} />
         </header>
     )
 }

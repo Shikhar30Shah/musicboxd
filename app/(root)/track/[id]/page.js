@@ -15,7 +15,6 @@ const Page = async ({ params }) => {
     // const trackDetails = state.get('trackDetails');
 
     const id = (await params)?.id;
-    console.log('the id', id);
     const reviews = await client.fetch(REVIEWS_BY_ID_QUERY, {id}) || [];
 
     const session = await auth();

@@ -4,6 +4,7 @@ import SearchForm from "../components/SearchForm";
 import SongsCard from "../components/SongsCard";
 import { REVIEWS_QUERY } from "@/sanity/lib/queries";
 import RecentlyPlayed from "../components/RecentlyPlayed";
+import SearchResults from "../components/SearchResults";
 
 export default async function Home({ searchParams }) {
 
@@ -25,9 +26,9 @@ export default async function Home({ searchParams }) {
       </section>
 
       <section className="section_container">
-        <p className="text-30-semibold">{session && 'Recently Played'}</p>
+        <p className="text-30-semibold">{session && (name ? `Search results for: ${name}` : 'Recently Played')}</p>
 
-        {session && <RecentlyPlayed session={session} />}
+        {session && (name ?  <SearchResults name={name} session={session} /> : <RecentlyPlayed session={session} />)}
       </section>
 
       <SanityLive />

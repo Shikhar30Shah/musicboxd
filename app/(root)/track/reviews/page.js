@@ -1,6 +1,8 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import SongsCard from "../../../components/SongsCard";
+import { sanityFetch } from '@/sanity/lib/live'
+import { ALL_REVIEWS_QUERY } from "../../../../sanity/lib/queries";
 
 const Page = async () => {
 
@@ -8,12 +10,12 @@ const Page = async () => {
     if(!session)
         redirect('/');
 
-    const { data: posts } = await sanityFetch({query: REVIEWS_QUERY});
+    const {data: posts} = await sanityFetch({query: ALL_REVIEWS_QUERY});
 
     return (
         <>
             <section className="main_container !min-h-[230px] music-bg">
-                <h1 className="tag ribbon-tag">Watch All Reviews</h1>
+                <h1 className="tag tag-tri">Watch All Reviews</h1>
             </section>
 
             <section className="section_container">

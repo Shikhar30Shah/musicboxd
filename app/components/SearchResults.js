@@ -19,7 +19,7 @@ const SearchResults = (props) => {
         if(session) {
             async function getSearchForm() {
                 try {
-                    const data = await fetch(`https://api.spotify.com/v1/ssearch?q=${name}&type=track%2Calbum%2Cepisode%2Cshow&limit=10`, {
+                    const data = await fetch(`https://api.spotify.com/v1/search?q=${name}&type=track&limit=10`, {
                         method: "GET",
                         headers: {
                             Authorization: `Bearer ${session?.accessToken}`

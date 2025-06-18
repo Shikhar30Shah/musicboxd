@@ -11,6 +11,12 @@ const monteserratSans = Montserrat({
 export const metadata = {
   title: "MusicBoxd",
   description: "To share the music you like.",
+  icons: {
+    icon: [{
+      href: '/MusicBoxd.svg',
+      url: '/MusicBoxd.svg'
+    }]
+  }
 };
 
 export default function RootLayout({ children }) {
